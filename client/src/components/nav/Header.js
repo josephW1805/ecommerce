@@ -16,16 +16,15 @@ import { useDispatch, useSelector } from "react-redux";
 const { SubMenu, Item } = Menu;
 
 const Header = () => {
-  const [current, setCurrent] = useState("home");
+  const [current, setCurrent] = useState("");
 
   let dispatch = useDispatch();
   let { user } = useSelector((state) => ({ ...state }));
 
   let history = useHistory();
 
-  const handleClick = (e) => {
-    console.log(current);
-    setCurrent(e.key);
+  const handleClick = () => {
+    setCurrent(current);
   };
 
   const logout = () => {
