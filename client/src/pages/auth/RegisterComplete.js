@@ -78,7 +78,7 @@ const RegisterComplete = ({ history }) => {
         autoFocus
       />
       <br />
-      <Button type="submit" className="btn btn-raised">
+      <Button type="submit" className="btn btn-raised" onClick={handleSubmit}>
         Complete Registration
       </Button>
     </form>
