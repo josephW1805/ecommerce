@@ -41,6 +41,7 @@ const RegisterComplete = ({ history }) => {
         await user.updatePassword(password);
         const idTokenResult = await user.getIdTokenResult();
         // redux store
+        console.log("User", user, "idTokenResult", idTokenResult);
         createOrUpdateUser(idTokenResult.token)
           .then((res) => {
             dispatch({
@@ -54,7 +55,7 @@ const RegisterComplete = ({ history }) => {
               },
             });
           })
-          .catch();
+          .catch((err) => console.log(err));
         // redirect
         history.push("/");
       }
