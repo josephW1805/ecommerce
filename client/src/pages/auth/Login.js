@@ -145,12 +145,13 @@ const Login = ({ history }) => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          {loading ? (
-            <Loader type="TailSpin" color="#00BFFF" height={40} width={40} />
-          ) : (
-            <h4>Login</h4>
-          )}
+          <h4>Login</h4>
           {loginForm()}
+          {loading && (
+            <div className="container p-5 text-center">
+              <Loader type="TailSpin" color="#00BFFF" height={40} width={40} />
+            </div>
+          )}
         </div>
       </div>
     </div>

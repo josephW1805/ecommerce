@@ -40,11 +40,7 @@ const ForgotPassword = ({ history }) => {
 
   return (
     <div className="container col-md-6 offset-md-3 p-5">
-      {loading ? (
-        <Loader type="TailSpin" color="#00BFFF" height={40} width={40} />
-      ) : (
-        <h4>Forgot Password</h4>
-      )}
+      <h4>Forgot Password</h4>
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -61,6 +57,11 @@ const ForgotPassword = ({ history }) => {
         >
           Submit
         </button>
+        {loading && (
+          <div className="container p-5 text-center">
+            <Loader type="TailSpin" color="#00BFFF" height={40} width={40} />
+          </div>
+        )}
       </form>
     </div>
   );
