@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Loader from "react-loader-spinner";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import Spinner from "../../components/Spinner";
 
 const ForgotPassword = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -57,11 +57,7 @@ const ForgotPassword = ({ history }) => {
         >
           Submit
         </button>
-        {loading && (
-          <div className="container p-5 text-center">
-            <Loader type="TailSpin" color="#00BFFF" height={40} width={40} />
-          </div>
-        )}
+        {loading && <Spinner />}
       </form>
     </div>
   );

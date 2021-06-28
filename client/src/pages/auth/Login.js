@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Loader from "react-loader-spinner";
 import { auth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
 import { Button } from "antd";
@@ -7,6 +6,7 @@ import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createOrUpdateUser } from "../../functions/auth";
+import Spinner from "../../components/Spinner";
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -147,11 +147,7 @@ const Login = ({ history }) => {
         <div className="col-md-6 offset-md-3">
           <h4>Login</h4>
           {loginForm()}
-          {loading && (
-            <div className="container p-5 text-center">
-              <Loader type="TailSpin" color="#00BFFF" height={40} width={40} />
-            </div>
-          )}
+          {loading && <Spinner />}
         </div>
       </div>
     </div>
