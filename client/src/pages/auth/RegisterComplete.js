@@ -3,6 +3,7 @@ import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrUpdateUser } from "../../functions/auth";
+import { Button } from "antd";
 
 const RegisterComplete = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -77,9 +78,9 @@ const RegisterComplete = ({ history }) => {
         autoFocus
       />
       <br />
-      <button type="submit" className="btn btn-raised">
+      <Button type="submit" className="btn btn-raised">
         Complete Registration
-      </button>
+      </Button>
     </form>
   );
 
