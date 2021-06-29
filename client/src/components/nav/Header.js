@@ -57,6 +57,16 @@ const Header = () => {
             <Link to="/login">Login</Link>
           </Item>
         )}
+        {user && user.role === "subscriber" && (
+          <Item key="dashboard">
+            <Link to="/user/history">Dashboard</Link>
+          </Item>
+        )}
+        {user && user.role === "admin" && (
+          <Item key="dashboard">
+            <Link to="/admin/dashboard">Dashboard</Link>
+          </Item>
+        )}
         {user && (
           <Item key="logout" icon={<LogoutOutlined />} onClick={logout}>
             Logout
