@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Menu } from "antd";
 import {
   AppstoreOutlined,
+  HomeOutlined,
   LockFilled,
   LockOutlined,
   UserOutlined,
@@ -38,7 +39,7 @@ const Header = () => {
 
   return (
     <Menu onClick={handleClick} selectedKeys={null} mode="horizontal">
-      <Item key="home" icon={<AppstoreOutlined />}>
+      <Item key="home" icon={<HomeOutlined />}>
         <Link to="/">Home</Link>
       </Item>
 
@@ -58,12 +59,12 @@ const Header = () => {
           </Item>
         )}
         {user && user.role === "subscriber" && (
-          <Item key="dashboard">
+          <Item key="dashboard" icon={<AppstoreOutlined />}>
             <Link to="/user/history">Dashboard</Link>
           </Item>
         )}
         {user && user.role === "admin" && (
-          <Item key="dashboard">
+          <Item key="dashboard" icon={<AppstoreOutlined />}>
             <Link to="/admin/dashboard">Dashboard</Link>
           </Item>
         )}
