@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCategories } from "../../../functions/category";
-import { createSub, getSub, removeSub } from "../../../functions/sub";
+import { createSub, getSub, removeSub, getSubs } from "../../../functions/sub";
 import Spinner from "../../../components/Spinner";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import CategoryForm from "../../../components/forms/CategoryForm";
@@ -17,14 +17,18 @@ const SubCreate = () => {
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState("");
+  const [subs, setSubs] = useState([]);
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
     loadCategories();
+    loadSubs();
   }, []);
 
   const loadCategories = () =>
     getCategories().then((c) => setCategories(c.data));
+
+  const loadSubs = () => getSubs().then((s) => setSubs(s.data));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,6 +38,7 @@ const SubCreate = () => {
         setLoading(false);
         setName("");
         toast.success(`"${res.data.name}" is created`);
+        loadSubs();
       })
       .catch((err) => {
         setLoading(false);
@@ -48,6 +53,7 @@ const SubCreate = () => {
         .then((res) => {
           setLoading(false);
           toast.error(`"${res.data.name}" is deleted`);
+          loadSubs();
         })
         .catch((err) => {
           if (err.response.status === 400) {
@@ -73,9 +79,10 @@ const SubCreate = () => {
             <select
               name="category"
               className="form-control"
+              defaultValue={"DEFAULT"}
               onChange={(e) => setCategory(e.target.value)}
             >
-              <option disabled selected>
+              <option value="DEFAULT" disabled>
                 Please select
               </option>
               {categories.length > 0 &&
@@ -87,7 +94,6 @@ const SubCreate = () => {
             </select>
           </div>
 
-          {JSON.stringify(category)}
           <CategoryForm
             handleSubmit={handleSubmit}
             name={name}
@@ -95,22 +101,22 @@ const SubCreate = () => {
           />
           <LocalSearch keyword={keyword} setKeyword={setKeyword} />
           {loading && <Spinner />}
-          {/* {categories.filter(searched(keyword)).map((c) => (
-            <div className="alert alert-primary" key={c._id}>
-              {c.name}
+          {subs.filter(searched(keyword)).map((s) => (
+            <div className="alert alert-primary" key={s._id}>
+              {s.name}
               <span
-                onClick={() => handleRemove(c.slug)}
+                onClick={() => handleRemove(s.slug)}
                 className="btn btn-sm float-right"
               >
                 <DeleteOutlined className="text-danger" />
               </span>
-              <Link to={`/admin/category/${c.slug}`}>
+              <Link to={`/admin/sub/${s.slug}`}>
                 <span className="btn btn-sm float-right">
                   <EditOutlined className="text-warning" />
                 </span>
               </Link>
             </div>
-          ))} */}
+          ))}
         </div>
       </div>
     </div>
