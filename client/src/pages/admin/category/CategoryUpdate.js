@@ -48,7 +48,6 @@ const CategoryUpdate = ({ history, match }) => {
             name={name}
             setName={setName}
           />
-          <hr />
           {loading && <Spinner />}
         </div>
       </div>
