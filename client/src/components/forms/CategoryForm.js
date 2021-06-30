@@ -1,6 +1,6 @@
 import React from "react";
 
-export const CategoryForm = ({ handleSubmit, name, setName }) => (
+const CategoryForm = ({ handleSubmit, name, setName }) => (
   <form onSubmit={handleSubmit}>
     <div className="form-group">
       <label>Name</label>
