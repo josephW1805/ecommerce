@@ -87,6 +87,7 @@ const CategoryCreate = () => {
         <div className="col">
           <h4>Create Category</h4>
           {categoryForm()}
+          <hr />
           {loading && <Spinner />}
           {categories.map((c) => (
             <div className="alert alert-primary" key={c._id}>
