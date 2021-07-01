@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const {ObjectId} = mongoose.Schema;
+const { ObjectId } = mongoose.Schema;
 
 const productSchema = new mongoose.Schema(
   {
@@ -28,10 +28,10 @@ const productSchema = new mongoose.Schema(
       required: true,
       maxLength: 32,
     },
-    // category: {
-    //   type: ObjectId,
-    //   ref: "Category",
-    // },
+    category: {
+      type: ObjectId,
+      ref: "Category",
+    },
     // subs: [
     //   {
     //     type: ObjectId,
