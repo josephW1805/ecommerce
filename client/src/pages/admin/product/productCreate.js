@@ -95,6 +95,7 @@ const ProductCreate = () => {
                 name="shipping"
                 className="form-control"
                 onChange={handleChange}
+                defaultValue={"DEFAULT"}
               >
                 <option value="DEFAULT" disabled>
                   Please select
@@ -119,6 +120,7 @@ const ProductCreate = () => {
                 name="color"
                 className="form-control"
                 onChange={handleChange}
+                defaultValue={"DEFAULT"}
               >
                 <option value="DEFAULT" disabled>
                   Please select
@@ -136,6 +138,7 @@ const ProductCreate = () => {
                 name="brand"
                 className="form-control"
                 onChange={handleChange}
+                defaultValue={"DEFAULT"}
               >
                 <option value="DEFAULT" disabled>
                   Please select
