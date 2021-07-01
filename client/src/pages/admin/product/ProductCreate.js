@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { createProduct } from "../../../functions/product";
 import ProductCreateForm from "../../../components/forms/ProductCreateForm";
 import { getCategories, getCategorySubs } from "../../../functions/category";
+import FileUpload from "../../../components/forms/FileUpload";
 
 const initialState = {
   title: "",
@@ -73,6 +74,9 @@ const ProductCreate = () => {
           <h4>Product create</h4>
           <hr />
           {JSON.stringify(values.subs)}
+          <div className="p-3">
+            <FileUpload />
+          </div>
           <ProductCreateForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
