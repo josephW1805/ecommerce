@@ -1,6 +1,11 @@
 import React from "react";
 
-const ProductCreateForm = ({ handleSubmit, handleChange, values }) => {
+const ProductCreateForm = ({
+  handleSubmit,
+  handleChange,
+  handleCategoryChange,
+  values,
+}) => {
   // destructure
   const {
     title,
@@ -117,7 +122,7 @@ const ProductCreateForm = ({ handleSubmit, handleChange, values }) => {
           name="category"
           className="form-control"
           defaultValue={"DEFAULT"}
-          onChange={handleChange}
+          onChange={handleCategoryChange}
         >
           <option value="DEFAULT" disabled>
             Please select
