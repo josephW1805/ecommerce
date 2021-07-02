@@ -22,7 +22,7 @@ const ProductCreateForm = ({
     subs,
     shipping,
     quantity,
-    image,
+    images,
     colors,
     brands,
     color,
