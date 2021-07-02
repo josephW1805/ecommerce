@@ -2,14 +2,14 @@ import React from "react";
 import Resizer from "react-image-file-resizer";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { Avatar } from "antd";
 
 const FileUpload = ({ values, setValues, setLoading }) => {
   const { user } = useSelector((state) => ({ ...state }));
 
   const fileUploadAndResize = (e) => {
-    // console.log(e.target.files);
     // resize
-    let files = e.target.files; // 3
+    let files = e.target.files;
     let allUploadedFiles = values.images;
 
     if (files) {
@@ -23,7 +23,6 @@ const FileUpload = ({ values, setValues, setLoading }) => {
           100,
           0,
           (uri) => {
-            // console.log(uri);
             axios
               .post(
                 `${process.env.REACT_APP_API}/uploadimages`,
@@ -55,18 +54,26 @@ const FileUpload = ({ values, setValues, setLoading }) => {
   };
 
   return (
-    <div className="row">
-      <label className="btn btn-primary">
-        Choose File
-        <input
-          type="file"
-          multiple
-          hidden
-          accept="images/*"
-          onChange={fileUploadAndResize}
-        />
-      </label>
-    </div>
+    <>
+      <div className="row">
+        {values.images &&
+          values.images.map((image) => (
+            <Avatar key={image.public_id} src={image.url} size={100} className="m-3" />
+          ))}
+      </div>
+      <div className="row">
+        <label className="btn btn-primary">
+          Choose File
+          <input
+            type="file"
+            multiple
+            hidden
+            accept="images/*"
+            onChange={fileUploadAndResize}
+          />
+        </label>
+      </div>
+    </>
   );
 };
 

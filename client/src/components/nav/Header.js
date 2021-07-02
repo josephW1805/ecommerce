@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu } from "antd";
+import { Avatar, Menu } from "antd";
 import {
   AppstoreOutlined,
   HomeOutlined,
@@ -45,7 +45,7 @@ const Header = () => {
 
       <SubMenu
         key="username"
-        icon={user ? <LockFilled /> : <LockOutlined />}
+        icon={user ? <Avatar icon={<UserOutlined />} /> : <LockOutlined />}
         title={user && user.email ? user.email.split("@")[0] : "Welcome"}
       >
         {!user && (
