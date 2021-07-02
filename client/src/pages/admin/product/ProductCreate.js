@@ -73,7 +73,7 @@ const ProductCreate = () => {
           <AdminNav />
         </div>
         <div className="col-md-10">
-          <h4>Product create</h4>
+          <h4>Create Product</h4>
           <hr />
           {loading && <Spinner />}
           <div className="p-3">
