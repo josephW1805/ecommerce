@@ -73,7 +73,7 @@ const SubCreate = () => {
           <AdminNav />
         </div>
         <div className="col">
-          <h4>Create sub Category</h4>
+          <h4>Create Sub Category</h4>
           <div className="form-group">
             <label>Parent Category</label>
             <select

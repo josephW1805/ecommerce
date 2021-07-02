@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import AdminNav from "../../components/nav/AdminNav";
 import { getProductByCount } from "../../functions/product";
 import Spinner from "../../components/Spinner";
+import AdminProductCard from "../../components/cards/AdminProductCard";
 
 const AdminDashboard = () => {
   const [products, setProducts] = useState([]);
@@ -30,9 +31,17 @@ const AdminDashboard = () => {
         <div className="col-md-2">
           <AdminNav />
         </div>
-        <h4>All Products</h4>
-        {loading && <Spinner />}
-        <div className="col">{JSON.stringify(products)}</div>
+        <div className="col">
+          <h4>All Products</h4>
+          {loading && <Spinner />}
+          <div className="row">
+            {products.map((product) => (
+              <div key={product._id} className="col-md-4">
+                <AdminProductCard product={product} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
