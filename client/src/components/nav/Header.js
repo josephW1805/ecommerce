@@ -3,7 +3,6 @@ import { Avatar, Menu } from "antd";
 import {
   AppstoreOutlined,
   HomeOutlined,
-  LockFilled,
   LockOutlined,
   UserOutlined,
   UserAddOutlined,

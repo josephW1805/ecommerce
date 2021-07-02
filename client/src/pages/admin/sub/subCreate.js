@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCategories } from "../../../functions/category";
-import { createSub, getSub, removeSub, getSubs } from "../../../functions/sub";
+import { createSub, removeSub, getSubs } from "../../../functions/sub";
 import Spinner from "../../../components/Spinner";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import CategoryForm from "../../../components/forms/CategoryForm";
