@@ -74,7 +74,6 @@ const ProductCreate = () => {
         </div>
         <div className="col-md-10">
           <h4>Create Product</h4>
-          <hr />
           {loading && <Spinner />}
           <div className="p-3">
             <FileUpload

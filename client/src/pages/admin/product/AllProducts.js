@@ -32,10 +32,11 @@ const AllProducts = () => {
           <AdminNav />
         </div>
         <div className="col">
+          <h4>All Products</h4>
           {loading && <Spinner />}
           <div className="row">
             {products.map((product) => (
-              <div key={product._id} className="col-md-4">
+              <div key={product._id} className="col-md-4 pb-3">
                 <AdminProductCard product={product} />
               </div>
             ))}
