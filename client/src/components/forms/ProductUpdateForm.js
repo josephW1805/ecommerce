@@ -6,13 +6,14 @@ const { Option } = Select;
 const ProductUpdateForm = ({
   handleSubmit,
   handleChange,
-  handleCategoryChange,
-  arrayOfSub,
-  setArrayOfSub,
   setValues,
   values,
+  handleCategoryChange,
   categories,
   subOptions,
+  arrayOfSubs,
+  setArrayOfSubs,
+  selectedCategory,
 }) => {
   // destructure
   const {
@@ -42,6 +43,7 @@ const ProductUpdateForm = ({
           onChange={handleChange}
         />
       </div>
+
       <div className="form-group">
         <label>Description</label>
         <input
@@ -52,6 +54,7 @@ const ProductUpdateForm = ({
           onChange={handleChange}
         />
       </div>
+
       <div className="form-group">
         <label>Price</label>
         <input
@@ -62,18 +65,20 @@ const ProductUpdateForm = ({
           onChange={handleChange}
         />
       </div>
+
       <div className="form-group">
         <label>Shipping</label>
         <select
+          value={shipping === "Yes" ? "Yes" : "No"}
           name="shipping"
           className="form-control"
           onChange={handleChange}
-          value={shipping === "Yes" ? "Yes" : "No"}
         >
           <option value="No">No</option>
           <option value="Yes">Yes</option>
         </select>
       </div>
+
       <div className="form-group">
         <label>Quantity</label>
         <input
@@ -84,13 +89,14 @@ const ProductUpdateForm = ({
           onChange={handleChange}
         />
       </div>
+
       <div className="form-group">
         <label>Color</label>
         <select
+          value={color}
           name="color"
           className="form-control"
           onChange={handleChange}
-          value={color}
         >
           {colors.map((c) => (
             <option key={c} value={c}>
@@ -99,13 +105,14 @@ const ProductUpdateForm = ({
           ))}
         </select>
       </div>
+
       <div className="form-group">
         <label>Brand</label>
         <select
+          value={brand}
           name="brand"
           className="form-control"
           onChange={handleChange}
-          value={brand}
         >
           {brands.map((b) => (
             <option key={b} value={b}>
@@ -114,14 +121,15 @@ const ProductUpdateForm = ({
           ))}
         </select>
       </div>
+
       <div className="form-group">
         <label>Category</label>
         <select
           name="category"
           className="form-control"
           onChange={handleCategoryChange}
+          value={selectedCategory ? selectedCategory : category._id}
         >
-          <option>{category ? category.name : "Please select"}</option>
           {categories.length > 0 &&
             categories.map((c) => (
               <option key={c._id} value={c._id}>
@@ -130,14 +138,15 @@ const ProductUpdateForm = ({
             ))}
         </select>
       </div>
+
       <div>
         <label>Sub Categories</label>
         <Select
           mode="multiple"
           style={{ width: "100%" }}
           placeholder="Please select"
-          value={arrayOfSub}
-          onChange={(value) => setArrayOfSub(value)}
+          value={arrayOfSubs}
+          onChange={(value) => setArrayOfSubs(value)}
         >
           {subOptions.length &&
             subOptions.map((s) => (

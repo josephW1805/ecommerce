@@ -6,7 +6,6 @@ exports.create = async (req, res) => {
     const { name, parent } = req.body;
     res.json(await new Sub({ name, parent, slug: slugify(name) }).save());
   } catch (err) {
-    //console.log("SUB CREATED ERROR----->", err);
     res.status(400).send("Create sub failed");
   }
 };
@@ -18,7 +17,7 @@ exports.read = async (req, res) =>
   res.json(await Sub.findOne({ slug: req.params.slug }).exec());
 
 exports.update = async (req, res) => {
-  const { name,parent } = req.body;
+  const { name, parent } = req.body;
   try {
     const updated = await Sub.findOneAndUpdate(
       { slug: req.params.slug },

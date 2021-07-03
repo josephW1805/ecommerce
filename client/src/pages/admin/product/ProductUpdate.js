@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { getProduct } from "../../../functions/product";
 import { getCategories, getCategorySubs } from "../../../functions/category";
 import FileUpload from "../../../components/forms/FileUpload";
-import Spinner from "../../../components/Spinner";
+import { LoadingOutlined } from "@ant-design/icons";
 import ProductUpdateForm from "../../../components/forms/ProductUpdateForm";
 
 const initialState = {
@@ -28,7 +28,8 @@ const ProductUpdate = ({ match }) => {
   const [values, setValues] = useState(initialState);
   const [categories, setCategories] = useState([]);
   const [subOptions, setSubOptions] = useState([]);
-  const [arrayOfSub, setArrayOfSub] = useState([]);
+  const [arrayOfSubs, setArrayOfSubs] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const { user } = useSelector((state) => ({ ...state }));
   // router
@@ -52,7 +53,7 @@ const ProductUpdate = ({ match }) => {
       p.data.subs.map((s) => {
         arr.push(s._id);
       });
-      setArrayOfSub((prev) => arr);
+      setArrayOfSubs((prev) => arr); // required for ant design select to work
     });
   };
 
@@ -72,12 +73,19 @@ const ProductUpdate = ({ match }) => {
 
   const handleCategoryChange = (e) => {
     e.preventDefault();
-    console.log("CLICKED CATEGORY", e.target.value);
-    setValues({ ...values, subs: [], category: e.target.value });
+    setValues({ ...values, subs: [] });
+    setSelectedCategory(e.target.value);
     getCategorySubs(e.target.value).then((res) => {
-      console.log("SUB OPTIONS ON CATEGORY CLICKED", res);
       setSubOptions(res.data);
     });
+
+    // if user clicks back to the original category
+    // show its sub categories in default
+    if (values.category._id === e.target.value) {
+      loadProduct();
+    }
+
+    setArrayOfSubs([]);
   };
 
   return (
@@ -86,9 +94,11 @@ const ProductUpdate = ({ match }) => {
         <div className="col-md-2">
           <AdminNav />
         </div>
+
         <div className="col-md-10">
-          <h4>Update Product</h4>
+          <h4>Product update</h4>
           {JSON.stringify(values)}
+
           <ProductUpdateForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
@@ -97,9 +107,11 @@ const ProductUpdate = ({ match }) => {
             handleCategoryChange={handleCategoryChange}
             categories={categories}
             subOptions={subOptions}
-            arrayOfSub={arrayOfSub}
-            setArrayOfSub={setArrayOfSub}
+            arrayOfSubs={arrayOfSubs}
+            setArrayOfSubs={setArrayOfSubs}
+            selectedCategory={selectedCategory}
           />
+          <hr />
         </div>
       </div>
     </div>
