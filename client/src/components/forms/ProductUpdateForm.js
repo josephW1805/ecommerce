@@ -64,11 +64,8 @@ const ProductUpdateForm = ({
           name="shipping"
           className="form-control"
           onChange={handleChange}
-          defaultValue={"DEFAULT"}
+          value={shipping === "Yes" ? "Yes" : "No"}
         >
-          <option value="DEFAULT" disabled>
-            Please select
-          </option>
           <option value="No">No</option>
           <option value="Yes">Yes</option>
         </select>
@@ -89,11 +86,8 @@ const ProductUpdateForm = ({
           name="color"
           className="form-control"
           onChange={handleChange}
-          defaultValue={"DEFAULT"}
+          value={color}
         >
-          <option value="DEFAULT" disabled>
-            Please select
-          </option>
           {colors.map((c) => (
             <option key={c} value={c}>
               {c}
@@ -107,11 +101,8 @@ const ProductUpdateForm = ({
           name="brand"
           className="form-control"
           onChange={handleChange}
-          defaultValue={"DEFAULT"}
+          value={brand}
         >
-          <option value="DEFAULT" disabled>
-            Please select
-          </option>
           {brands.map((b) => (
             <option key={b} value={b}>
               {b}
