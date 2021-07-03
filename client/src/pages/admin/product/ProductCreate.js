@@ -6,7 +6,7 @@ import { createProduct } from "../../../functions/product";
 import ProductCreateForm from "../../../components/forms/ProductCreateForm";
 import { getCategories, getCategorySubs } from "../../../functions/category";
 import FileUpload from "../../../components/forms/FileUpload";
-import Spinner from "../../../components/Spinner";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const initialState = {
   title: "",
@@ -74,7 +74,7 @@ const ProductCreate = () => {
         </div>
         <div className="col-md-10">
           <h4>Create Product</h4>
-          {loading && <Spinner />}
+          {loading && <LoadingOutlined />}
           <div className="p-3">
             <FileUpload
               values={values}
