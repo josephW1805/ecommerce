@@ -7,6 +7,7 @@ import { getCategories, getCategorySubs } from "../../../functions/category";
 import FileUpload from "../../../components/forms/FileUpload";
 import { LoadingOutlined } from "@ant-design/icons";
 import ProductUpdateForm from "../../../components/forms/ProductUpdateForm";
+import Spinner from "../../../components/Spinner";
 
 const initialState = {
   title: "",
@@ -30,6 +31,7 @@ const ProductUpdate = ({ match }) => {
   const [subOptions, setSubOptions] = useState([]);
   const [arrayOfSubs, setArrayOfSubs] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { user } = useSelector((state) => ({ ...state }));
   // router
@@ -97,8 +99,14 @@ const ProductUpdate = ({ match }) => {
 
         <div className="col-md-10">
           <h4>Product update</h4>
-          {JSON.stringify(values)}
-
+          {loading && <Spinner />}
+          <div className="p-3">
+            <FileUpload
+              values={values}
+              setValues={setValues}
+              setLoading={setLoading}
+            />
+          </div>
           <ProductUpdateForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
