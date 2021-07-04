@@ -66,7 +66,7 @@ exports.update = async (req, res) => {
 exports.list = async (req, res) => {
   try {
     const { sort, order, limit } = req.body;
-    const product = await Product.find({})
+    const products = await Product.find({})
       .populate("category")
       .populate("subs")
       .sort([[sort, order]])
