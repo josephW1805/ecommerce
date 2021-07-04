@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AdminNav from "../../../components/nav/AdminNav";
-import { getProductByCount } from "../../../functions/product";
+import { getProductsByCount } from "../../../functions/product";
 import Spinner from "../../../components/Spinner";
 import AdminProductCard from "../../../components/cards/AdminProductCard";
 import { removeProduct } from "../../../functions/product";
@@ -19,7 +19,7 @@ const AllProducts = () => {
 
   const loadAllProducts = () => {
     setLoading(true);
-    getProductByCount(100)
+    getProductsByCount(100)
       .then((res) => {
         setProducts(res.data);
         setLoading(false);
