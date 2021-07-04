@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getProductByCount } from "../functions/product";
 import ProductCard from "../components/cards/ProductCard";
 import Spinner from "../components/Spinner";
+import Jumbotron from "../components/cards/Jumbotron";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -21,9 +22,8 @@ const Home = () => {
 
   return (
     <>
-      <div className="jumbotron">
-        <h4>AllProducts</h4>
-        {loading && <Spinner />}
+      <div className="jumbotron text-info h1 font-weight-bold text-center">
+        <Jumbotron text={["Latest Products", "New Arrivals", "Best Sellers"]} />
       </div>
       <div className="container">
         <div className="row">
