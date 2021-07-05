@@ -14,6 +14,7 @@ const {
   update,
   list,
   productsCount,
+  productStar,
 } = require("../controllers/product");
 
 // routes
