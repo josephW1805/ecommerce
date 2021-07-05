@@ -7,6 +7,7 @@ import { Carousel } from "react-responsive-carousel";
 import Laptop from "../../images/laptop.png";
 import ProductListItems from "./ProductListItems";
 import StarRating from "react-star-ratings";
+import RatingModal from "../modal/RatingModal";
 
 const { TabPane } = Tabs;
 
@@ -37,17 +38,6 @@ const SingleProduct = ({ product }) => {
       </div>
       <div className="col-md-5">
         <h1 className="p-3">{title}</h1>
-        <StarRating
-          name={_id}
-          numberOfStars={5}
-          rating={2}
-          starRatedColor="yellow"
-          starHoverColor="yellow"
-          changeRating={(newRating, name) =>
-            console.log("new rating", newRating, "name", name)
-          }
-          issSelectable={ true }
-        />
         <Card
           actions={[
             <>
@@ -60,6 +50,19 @@ const SingleProduct = ({ product }) => {
               <br />
               Add to Wishlist
             </Link>,
+            <RatingModal>
+              <StarRating
+                name={_id}
+                numberOfStars={5}
+                rating={2}
+                starRatedColor="yellow"
+                starHoverColor="yellow"
+                changeRating={(newRating, name) =>
+                  console.log("new rating", newRating, "name", name)
+                }
+                issSelectable={true}
+              />
+            </RatingModal>,
           ]}
         >
           <ProductListItems product={product} />
