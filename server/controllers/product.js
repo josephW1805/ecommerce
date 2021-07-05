@@ -1,4 +1,5 @@
 const Product = require("../models/product");
+const User = require("../models/user");
 const slugify = require("slugify");
 
 exports.create = async (req, res) => {
@@ -89,7 +90,7 @@ exports.productsCount = async (req, res) => {
 };
 
 exports.productStar = async (req, res) => {
-  const products = await Product.findById(req.params.productId).exec();
+  const product = await Product.findById(req.params.productId).exec();
   const user = await User.findOne({ email: req.user.email }).exec();
   const { star } = req.body;
 
