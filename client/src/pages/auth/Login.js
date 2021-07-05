@@ -20,7 +20,9 @@ const Login = ({ history }) => {
   useEffect(() => {
     if (intended) {
       return;
-    } else if (user && user.token) history.push("/");
+    } else {
+      if (user && user.token) history.push("/");
+    }
   }, [user, history, intended]);
 
   let dispatch = useDispatch();
