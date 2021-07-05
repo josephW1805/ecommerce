@@ -15,20 +15,18 @@ const Login = ({ history }) => {
 
   const { user } = useSelector((state) => ({ ...state }));
 
+  let intended = history.location.state;
+
   useEffect(() => {
-    let intended = history.location.state;
     if (intended) {
       return;
-    } else {
-      if (user && user.token) history.push("/");
-    }
-  }, [user, history]);
+    } else if (user && user.token) history.push("/");
+  }, [user, history, intended]);
 
   let dispatch = useDispatch();
 
   const roleBasedRedirect = (res) => {
     // check if intended
-    let intended = history.location.state;
     if (intended) {
       history.push(intended.from);
     } else {
