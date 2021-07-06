@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getCategory } from "../../functions/category";
 import { Link } from "react-router-dom";
 import ProductCard from "../../components/cards/ProductCard";
+import Spinner from "../../components/Spinner";
 
 const CategoryHome = ({ match }) => {
   const [category, setCategory] = useState({});
@@ -12,13 +13,36 @@ const CategoryHome = ({ match }) => {
 
   useEffect(() => {
     setLoading(true);
-    getCategory(slug).then((c) => {
-      console.log(JSON.stringify(c.data, null, 4));
-      setCategory(c.data);
+    getCategory(slug).then((res) => {
+      console.log(JSON.stringify(res.data, null, 4));
+      setCategory(res.data.category);
+      setProducts(res.data.products);
+      setLoading(false);
     });
   }, []);
 
-  return <p>{slug}</p>;
+  return (
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col">
+          {loading ? (
+            <Spinner className="text-center p-3 mt-5 mb-5 jumbotron" />
+          ) : (
+            <h4 className="text-center p-3 mt-5 mb-5 jumbotron">
+              {products.length} Products in "{category.name}" category
+            </h4>
+          )}
+        </div>
+      </div>
+      <div className="row">
+        {products.map((p) => (
+          <div className="col-md-4" key={p._id}>
+            <ProductCard product={p} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default CategoryHome;
