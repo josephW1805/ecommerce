@@ -39,9 +39,11 @@ const SingleProduct = ({ product, onStarClick, star }) => {
       </div>
       <div className="col-md-5">
         <h1 className="p-3">{title}</h1>
-        {product && product.ratings && product.ratings.length > 0
-          ? showAverage(product)
-          : "No rating yet"}
+        {product && product.ratings && product.ratings.length > 0 ? (
+          showAverage(product)
+        ) : (
+          <div className="text-center pt-1 pb-3">No rating yet</div>
+        )}
         <Card
           actions={[
             <>
