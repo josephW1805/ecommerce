@@ -3,6 +3,7 @@ import { Avatar, Menu } from "antd";
 import {
   AppstoreOutlined,
   HomeOutlined,
+  ShoppingOutlined,
   LockOutlined,
   UserOutlined,
   UserAddOutlined,
@@ -42,6 +43,9 @@ const Header = () => {
       <Menu onClick={handleClick} selectedKeys={null} mode="horizontal">
         <Item key="home" icon={<HomeOutlined />}>
           <Link to="/">Home</Link>
+        </Item>
+        <Item key="shop" icon={<ShoppingOutlined />}>
+          <Link to="/shop">Shop</Link>
         </Item>
 
         <SubMenu
