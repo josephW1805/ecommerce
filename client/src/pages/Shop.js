@@ -8,11 +8,12 @@ import { getSubs } from "../functions/sub";
 import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "../components/cards/ProductCard";
 import Spinner from "../components/Spinner";
-import { Menu, Slider, Checkbox } from "antd";
+import { Menu, Slider, Checkbox, Radio } from "antd";
 import {
   DollarOutlined,
   DownSquareOutlined,
   StarOutlined,
+  TagsOutlined,
 } from "@ant-design/icons";
 import Star from "../components/forms/Star";
 
@@ -28,6 +29,14 @@ const Shop = () => {
   const [star, setStar] = useState("");
   const [subs, setSubs] = useState([]);
   const [sub, setSub] = useState("");
+  const [brands, setBrands] = useState([
+    "Apple",
+    "Samsung",
+    "Microsoft",
+    "Lenovo",
+    "ASUS",
+  ]);
+  const [brand, setBrand] = useState("");
 
   let dispatch = useDispatch();
   let { search } = useSelector((state) => ({ ...state }));
@@ -79,6 +88,7 @@ const Shop = () => {
     setPrice(value);
     setStar("");
     setSub("");
+    setBrand("");
     setTimeout(() => {
       setOk(!ok);
     }, 300);
@@ -112,6 +122,7 @@ const Shop = () => {
     setPrice([0, 0]);
     setStar("");
     setSub("");
+    setBrand("");
     let inTheState = [...categoryIds];
     let justChecked = e.target.value;
     let foundInTheState = inTheState.indexOf(justChecked);
@@ -139,6 +150,7 @@ const Shop = () => {
     setPrice([0, 0]);
     setCategoryIds([]);
     setSub("");
+    setBrand("");
   };
 
   const showStars = () => (
@@ -175,6 +187,35 @@ const Shop = () => {
     setPrice([0, 0]);
     setCategoryIds([]);
     setStar("");
+    setBrand("");
+  };
+
+  // show products based on brand name
+  const showBrands = () =>
+    brands.map((b) => (
+      <Radio
+        value={b}
+        name={b}
+        checked={b === brand}
+        onChange={handleBrand}
+        className="pb-1 pl-4 pr-4"
+      >
+        {b}
+      </Radio>
+    ));
+
+  const handleBrand = (e) => {
+    setBrand(e.target.value);
+    fetchProducts({ brand: e.target.value });
+    // reset
+    dispatch({
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
+    });
+    setPrice([0, 0]);
+    setCategoryIds([]);
+    setStar("");
+    setSub("");
   };
 
   return (
@@ -183,7 +224,10 @@ const Shop = () => {
         <div className="col-md-3 pt-2">
           <h4>Search/Filter</h4>
           <hr />
-          <Menu defaultOpenKeys={["1", "2", "3", "4"]} mode="inline">
+          <Menu
+            defaultOpenKeys={["1", "2", "3", "4", "5", "6", "7"]}
+            mode="inline"
+          >
             {/* price */}
             <SubMenu
               key="1"
@@ -237,13 +281,28 @@ const Shop = () => {
               key="4"
               title={
                 <span className="h6">
-                  <DownSquareOutlined />
+                  <TagsOutlined />
                   Sub Categories
                 </span>
               }
             >
               <div style={{ marginTop: "-10px" }} className="pl-4 pr-4">
                 {showSubs()}
+              </div>
+            </SubMenu>
+
+            {/* brands */}
+            <SubMenu
+              key="5"
+              title={
+                <span className="h6">
+                  <TagsOutlined />
+                  Brands
+                </span>
+              }
+            >
+              <div style={{ marginTop: "-10px" }} className="pr-5">
+                {showBrands()}
               </div>
             </SubMenu>
           </Menu>
