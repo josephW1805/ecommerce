@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { getProductsByCount } from "../functions/product";
+import {
+  getProductsByCount,
+  fetchProductsByFilter,
+} from "../functions/product";
 import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "../components/cards/ProductCard";
 import Spinner from "../components/Spinner";
@@ -8,14 +11,32 @@ const Shop = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  let { search } = useSelector((state) => ({ ...state }));
+  const { text } = search;
+
   useEffect(() => {
     loadAllProducts();
   }, []);
 
+  // load products by default on page load
   const loadAllProducts = () => {
     getProductsByCount(12).then((p) => {
       setProducts(p.data);
       setLoading(false);
+    });
+  };
+
+  // load products by user search input
+  useEffect(() => {
+    const delayed = setTimeout(() => {
+      fetchProducts({ query: text });
+    }, 300);
+    return () => clearTimeout(delayed);
+  }, [text]);
+
+  const fetchProducts = (arg) => {
+    fetchProductsByFilter(arg).then((res) => {
+      setProducts(res.data);
     });
   };
 
