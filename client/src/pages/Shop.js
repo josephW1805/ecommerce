@@ -14,6 +14,9 @@ import {
   DownSquareOutlined,
   StarOutlined,
   TagsOutlined,
+  AntDesignOutlined,
+  BgColorsOutlined,
+  TransactionOutlined,
 } from "@ant-design/icons";
 import Star from "../components/forms/Star";
 
@@ -37,6 +40,14 @@ const Shop = () => {
     "ASUS",
   ]);
   const [brand, setBrand] = useState("");
+  const [colors, setColors] = useState([
+    "Black",
+    "Brown",
+    "Silver",
+    "White",
+    "Blue",
+  ]);
+  const [color, setColor] = useState("");
 
   let dispatch = useDispatch();
   let { search } = useSelector((state) => ({ ...state }));
@@ -89,6 +100,7 @@ const Shop = () => {
     setStar("");
     setSub("");
     setBrand("");
+    setColor("");
     setTimeout(() => {
       setOk(!ok);
     }, 300);
@@ -123,6 +135,7 @@ const Shop = () => {
     setStar("");
     setSub("");
     setBrand("");
+    setColor("");
     let inTheState = [...categoryIds];
     let justChecked = e.target.value;
     let foundInTheState = inTheState.indexOf(justChecked);
@@ -151,6 +164,7 @@ const Shop = () => {
     setCategoryIds([]);
     setSub("");
     setBrand("");
+    setColor("");
   };
 
   const showStars = () => (
@@ -188,6 +202,7 @@ const Shop = () => {
     setCategoryIds([]);
     setStar("");
     setBrand("");
+    setColor("");
   };
 
   // show products based on brand name
@@ -216,6 +231,36 @@ const Shop = () => {
     setCategoryIds([]);
     setStar("");
     setSub("");
+    setColor("");
+  };
+
+  // show Products based on color
+  const showColors = () =>
+    colors.map((c) => (
+      <Radio
+        value={c}
+        name={c}
+        checked={c === color}
+        onChange={handleColor}
+        className="pb-1 pl-4 pr-4"
+      >
+        {c}
+      </Radio>
+    ));
+
+  const handleColor = (e) => {
+    setColor(e.target.value);
+    fetchProducts({ color: e.target.value });
+    // reset
+    dispatch({
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
+    });
+    setPrice([0, 0]);
+    setCategoryIds([]);
+    setStar("");
+    setSub("");
+    setBrand("");
   };
 
   return (
@@ -296,13 +341,28 @@ const Shop = () => {
               key="5"
               title={
                 <span className="h6">
-                  <TagsOutlined />
+                  <AntDesignOutlined />
                   Brands
                 </span>
               }
             >
               <div style={{ marginTop: "-10px" }} className="pr-5">
                 {showBrands()}
+              </div>
+            </SubMenu>
+
+            {/* colors */}
+            <SubMenu
+              key="6"
+              title={
+                <span className="h6">
+                  <BgColorsOutlined />
+                  Colors
+                </span>
+              }
+            >
+              <div style={{ marginTop: "-10px" }} className="pr-5">
+                {showColors()}
               </div>
             </SubMenu>
           </Menu>
