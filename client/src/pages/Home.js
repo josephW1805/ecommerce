@@ -7,7 +7,7 @@ import SubList from "../components/sub/SubList";
 
 const Home = () => {
   return (
-    <>
+    <div className="container-fluid">
       <div className="jumbotron text-info h1 font-weight-bold text-center">
         <Jumbotron text={["Latest Products", "New Arrivals", "Best Sellers"]} />
       </div>
@@ -33,7 +33,7 @@ const Home = () => {
       <SubList />
       <br />
       <br />
-    </>
+    </div>
   );
 };
 
