@@ -88,7 +88,7 @@ const FileUpload = ({ values, setValues, setLoading }) => {
               count="X"
               key={image.public_id}
               onClick={() => handleImageRemove(image.public_id)}
-              style={{ cursor: "pointer" }}
+              className='pointer'
             >
               <Avatar
                 src={image.url}

@@ -188,8 +188,7 @@ const Shop = () => {
       <div
         key={s._id}
         onClick={() => handleSub(s)}
-        className="p-1 m-1 badge badge-primary"
-        style={{ cursor: "pointer" }}
+        className="p-1 m-1 badge badge-primary pointer"
       >
         {s.name}
       </div>
