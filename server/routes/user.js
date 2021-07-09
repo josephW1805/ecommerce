@@ -4,7 +4,7 @@ const router = express.Router();
 
 // middleware
 const { authCheck } = require("../middleware/auth");
-// controller
+// controllers
 const { userCart, getUserCart } = require("../controllers/user");
 
 router.post("/user/cart", authCheck, userCart); // save cart
