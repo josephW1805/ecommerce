@@ -3,10 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { getUserCart, emptyUserCart, saveUserAddress } from "../functions/user";
 import { Button } from "antd";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const Checkout = ({ history }) => {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
+  const [address, setAddress] = useState("");
+  const [addressSaved, setAddressSaved] = useState(false);
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
@@ -42,7 +46,13 @@ const Checkout = ({ history }) => {
   };
 
   const saveAddressToDb = () => {
-    //
+    // console.log(address);
+    saveUserAddress(user.token, address).then((res) => {
+      if (res.data.ok) {
+        setAddressSaved(true);
+        toast.success("Address saved");
+      }
+    });
   };
 
   return (
@@ -51,7 +61,7 @@ const Checkout = ({ history }) => {
         <h4>Delivery Address</h4>
         <br />
         <br />
-        textarea
+        <ReactQuill theme="snow" value={address} onChange={setAddress} />
         <button className="btn btn-primary mt-2" onClick={saveAddressToDb}>
           Save
         </button>
@@ -79,7 +89,10 @@ const Checkout = ({ history }) => {
 
         <div className="row">
           <div className="col-md-6">
-            <Button disabled={!products.length} className="btn btn-primary">
+            <Button
+              disabled={!products.length || !addressSaved}
+              className="btn btn-primary"
+            >
               Place Order
             </Button>
           </div>
