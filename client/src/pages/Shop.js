@@ -24,7 +24,7 @@ const { SubMenu, ItemGroup } = Menu;
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [price, setPrice] = useState([0, 0]);
   const [ok, setOk] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -81,6 +81,9 @@ const Shop = () => {
   useEffect(() => {
     const delayed = setTimeout(() => {
       fetchProducts({ query: text });
+      if (!text) {
+        loadAllProducts();
+      }
     }, 300);
     return () => clearTimeout(delayed);
   }, [text]);
@@ -430,8 +433,9 @@ const Shop = () => {
           </Menu>
         </div>
         <div className="col-md-9 pt-2">
-          {loading ? <Spinner /> : <h4 className="text-info">Products</h4>}
-          {products.length < 1 && <p>No products found</p>}
+          <h4 className="text-info">Products</h4>
+          {loading && <Spinner className="text-center" />}
+          {products.length < 1 && <p></p>}
 
           <div className="row pb-5">
             {products.map((p) => (
