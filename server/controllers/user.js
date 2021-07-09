@@ -2,7 +2,7 @@ const User = require("../models/user");
 const Product = require("../models/product");
 const Cart = require("../models/cart");
 
-exports.useCart = async (req, res) => {
+exports.userCart = async (req, res) => {
   const { cart } = req.body;
 
   let products = [];
