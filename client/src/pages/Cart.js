@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "antd";
 import ProductCardInCheckout from "../components/cards/ProductCardInCheckout";
 
-const Cart = () => {
+const Cart = ({ history }) => {
   const { cart, user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
 
@@ -15,7 +15,8 @@ const Cart = () => {
   };
 
   const saveOrderToDb = () => {
-    //
+    alert("save order to db");
+    history.push("/checkout");
   };
 
   const showCartItems = () => (

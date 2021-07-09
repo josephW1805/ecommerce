@@ -9,7 +9,7 @@ const SideDrawer = () => {
   const { drawer, cart } = useSelector((state) => ({ ...state }));
 
   const imageStyle = {
-    width: "100px",
+    width: "100%",
     height: "50px",
     objectFit: "cover",
   };
@@ -27,7 +27,7 @@ const SideDrawer = () => {
       visible={drawer}
     >
       {cart.map((p) => (
-        <div key={p._id} className="row">
+        <div key={p.id} className="row">
           <div className="col">
             {p.images[0] ? (
               <>

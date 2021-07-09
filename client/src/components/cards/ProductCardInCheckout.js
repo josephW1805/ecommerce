@@ -63,7 +63,7 @@ const ProductCardInCheckout = ({ p }) => {
     }
   };
 
-  const handleRemove = (e) => {
+  const handleRemove = () => {
     let cart = [];
 
     if (typeof window !== "undefined") {
@@ -73,7 +73,7 @@ const ProductCardInCheckout = ({ p }) => {
 
       cart.map((product, i) => {
         if (product._id === p._id) {
-         cart.splice(i, 1);
+          cart.splice(i, 1);
         }
       });
 
