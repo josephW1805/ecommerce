@@ -16,9 +16,6 @@ const Checkout = ({ history }) => {
   const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
-    if (!user) {
-      return;
-    }
     getUserCart(user.token).then((res) => {
       setProducts(res.data.products);
       setTotal(res.data.cartTotal);
