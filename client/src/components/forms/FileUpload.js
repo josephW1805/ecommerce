@@ -74,7 +74,7 @@ const FileUpload = ({ values, setValues, setLoading }) => {
         setValues({ ...values, images: filteredImages });
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         setLoading(false);
       });
   };
@@ -88,7 +88,7 @@ const FileUpload = ({ values, setValues, setLoading }) => {
               count="X"
               key={image.public_id}
               onClick={() => handleImageRemove(image.public_id)}
-              className='pointer'
+              className="pointer"
             >
               <Avatar
                 src={image.url}

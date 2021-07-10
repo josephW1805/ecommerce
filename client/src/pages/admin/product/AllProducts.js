@@ -4,7 +4,7 @@ import { getProductsByCount } from "../../../functions/product";
 import Spinner from "../../../components/Spinner";
 import AdminProductCard from "../../../components/cards/AdminProductCard";
 import { removeProduct } from "../../../functions/product";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
 const AllProducts = () => {
@@ -25,7 +25,7 @@ const AllProducts = () => {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         setLoading(false);
       });
   };
@@ -42,7 +42,7 @@ const AllProducts = () => {
         })
         .catch((err) => {
           if (err.response.status === 400) toast.error(err.response.data);
-          console.log(err);
+          console.error(err);
         });
     }
   };

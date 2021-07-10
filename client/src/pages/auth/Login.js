@@ -62,7 +62,7 @@ const Login = ({ history }) => {
           });
           roleBasedRedirect(res);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.error(err));
     } catch (error) {
       toast.error(error.message);
       setLoading(false);
@@ -89,7 +89,7 @@ const Login = ({ history }) => {
             });
             roleBasedRedirect(res);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => console.error(err));
       })
       .catch((err) => {
         toast.error(err.message);
