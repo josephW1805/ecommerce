@@ -13,7 +13,7 @@ exports.create = async (req, res) => {
 
 exports.remove = async (req, res) => {
   try {
-    res.json(await Coupon.findByIdAndDelete(req.params.couponId).save());
+    res.json(await Coupon.findByIdAndDelete(req.params.couponId).exec());
   } catch (err) {
     console.error(err);
   }
