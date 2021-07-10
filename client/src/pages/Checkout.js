@@ -16,16 +16,14 @@ const Checkout = ({ history }) => {
   const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
-    try {
-      getUserCart(user.token).then((res) => {
-        setProducts(res.data.products);
-        setTotal(res.data.cartTotal);
-      });
-    } catch (err) {
-      alert("try again");
-      history.push("/cart");
+    if (!user) {
+      return;
     }
-  }, []);
+    getUserCart(user.token).then((res) => {
+      setProducts(res.data.products);
+      setTotal(res.data.cartTotal);
+    });
+  }, [user]);
 
   const emptyCart = () => {
     // remove from local storage
