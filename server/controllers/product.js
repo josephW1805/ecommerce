@@ -4,7 +4,6 @@ const slugify = require("slugify");
 
 exports.create = async (req, res) => {
   try {
-    console.log(req.body);
     req.body.slug = slugify(req.body.title);
     const newProduct = await new Product(req.body).save();
     res.json(newProduct);
@@ -108,7 +107,6 @@ exports.productStar = async (req, res) => {
       },
       { new: true }
     ).exec();
-    console.log("ratingAdded", ratingAdded);
     res.json(ratingAdded);
   } else {
     // if user have already left rating, update it
@@ -256,42 +254,34 @@ exports.searchFilters = async (req, res) => {
     req.body;
 
   if (query) {
-    console.log("query--->", query);
     await handleQuery(req, res, query);
   }
 
   if (price !== undefined) {
-    console.log(`price--->`, price);
     await handlePrice(req, res, price);
   }
 
   if (category) {
-    console.log(`category--->`, category);
     await handleCategory(req, res, category);
   }
 
   if (stars) {
-    console.log(`stars--->`, stars);
     await handleStar(req, res, stars);
   }
 
   if (sub) {
-    console.log(`sub--->`, sub);
     await handleSub(req, res, sub);
   }
 
   if (shipping) {
-    console.log(`shipping--->`, shipping);
     await handleShipping(req, res, shipping);
   }
 
   if (color) {
-    console.log(`color--->`, color);
     await handleColor(req, res, color);
   }
 
   if (brand) {
-    console.log(`brand--->`, brand);
     await handleBrand(req, res, brand);
   }
 };

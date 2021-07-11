@@ -34,7 +34,6 @@ const FileUpload = ({ values, setValues, setLoading }) => {
                 }
               )
               .then((res) => {
-                console.log("IMAGE UPLOAD RES DATA", res);
                 setLoading(false);
                 allUploadedFiles.push(res.data);
 
@@ -42,7 +41,6 @@ const FileUpload = ({ values, setValues, setLoading }) => {
               })
               .catch((err) => {
                 setLoading(false);
-                console.log("CLOUDINARY UPLOAD ERR", err);
               });
           },
           "base64"

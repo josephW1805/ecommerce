@@ -42,7 +42,6 @@ const Checkout = ({ history }) => {
   };
 
   const saveAddressToDb = () => {
-    // console.log(address);
     saveUserAddress(user.token, address).then((res) => {
       if (res.data.ok) {
         setAddressSaved(true);

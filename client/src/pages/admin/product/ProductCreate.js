@@ -57,10 +57,8 @@ const ProductCreate = () => {
 
   const handleCategoryChange = (e) => {
     e.preventDefault();
-    console.log("CLICKED CATEGORY", e.target.value);
     setValues({ ...values, subs: [], category: e.target.value });
     getCategorySubs(e.target.value).then((res) => {
-      console.log("SUB OPTIONS ON CATEGORY CLICKED", res);
       setSubOptions(res.data);
     });
     setShowSub(true);
