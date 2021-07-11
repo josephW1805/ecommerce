@@ -24,7 +24,7 @@ const { SubMenu, ItemGroup } = Menu;
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [price, setPrice] = useState([0, 0]);
   const [ok, setOk] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -56,6 +56,7 @@ const Shop = () => {
   const { text } = search;
 
   useEffect(() => {
+    setLoading(true);
     loadAllProducts();
     // fetch categories
     getCategories().then((res) => setCategories(res.data));

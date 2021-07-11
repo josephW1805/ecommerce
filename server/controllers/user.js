@@ -107,5 +107,5 @@ exports.applyCouponToUserCart = async (req, res) => {
     { new: true }
   );
 
-  res.json{totalAfterDiscount}
+  res.json(totalAfterDiscount);
 };
