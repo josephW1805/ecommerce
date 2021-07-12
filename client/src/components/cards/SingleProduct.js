@@ -88,9 +88,9 @@ const SingleProduct = ({ product, onStarClick, star }) => {
         <Card
           actions={[
             <Tooltip title={tooltip}>
-              <a onClick={handleAddToCart}>
-                <ShoppingCartOutlined className="text-success" /> <br /> Add to
-                Cart
+              <a href onClick={handleAddToCart} disabled={product.quantity < 1}>
+                <ShoppingCartOutlined className="text-success" /> <br />
+                {product.quantity < 1 ? "Out of stock" : "Add to Cart"}
               </a>
             </Tooltip>,
             <Link to="/">
