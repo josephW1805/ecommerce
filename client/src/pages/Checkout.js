@@ -63,7 +63,6 @@ const Checkout = ({ history }) => {
 
   const applyDiscountCoupon = () => {
     applyCoupon(user.token, coupon).then((res) => {
-      console.log("RES ON COUPON APPLIED", res.data);
       if (res.data) {
         setTotalAfterDiscount(res.data);
         // update redux coupon applied true/false
