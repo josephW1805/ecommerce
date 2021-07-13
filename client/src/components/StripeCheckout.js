@@ -72,7 +72,6 @@ const StripeCheckout = ({ history }) => {
         }
       });
       // empty user cart from redux store and local storage
-      console.log(JSON.stringify(payload, null, 4));
       setError(null);
       setProcessing(false);
       setSucceeded(true);

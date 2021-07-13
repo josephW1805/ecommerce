@@ -1,6 +1,6 @@
 import React from "react";
 
-const ShowPaymentInfo = ({ order }) => (
+const ShowPaymentInfo = ({ order, showStatus = true }) => (
   <table className="table table-bordered">
     <thead className="thead-light">
       <tr>
@@ -10,22 +10,26 @@ const ShowPaymentInfo = ({ order }) => (
         <th scope="col">Method</th>
         <th scope="col">Payment</th>
         <th scope="col">Ordered on</th>
-        <th scope="col">STATUS</th>
+        {showStatus && <th scope="col">STATUS</th>}
       </tr>
     </thead>
     <tbody>
-      <td>{order.paymentIntent.id}</td>
-      <td>
-        {(order.paymentIntent.amount / 100).toLocaleString("en-CA", {
-          style: "currency",
-          currency: "CAD",
-        })}
-      </td>
-      <td>{order.paymentIntent.currency.toUpperCase()}</td>
-      <td>{order.paymentIntent.payment_method_types[0]}</td>
-      <td>{order.paymentIntent.status.toUpperCase()}</td>
-      <td>{new Date(order.paymentIntent.created * 1000).toLocaleString()}</td>
-      <td className="badge bg-primary text-white">{order.orderStatus}</td>
+      <tr>
+        <td>{order.paymentIntent.id}</td>
+        <td>
+          {(order.paymentIntent.amount / 100).toLocaleString("en-CA", {
+            style: "currency",
+            currency: "CAD",
+          })}
+        </td>
+        <td>{order.paymentIntent.currency.toUpperCase()}</td>
+        <td>{order.paymentIntent.payment_method_types[0]}</td>
+        <td>{order.paymentIntent.status.toUpperCase()}</td>
+        <td>{new Date(order.paymentIntent.created * 1000).toLocaleString()}</td>
+        {showStatus && (
+          <td className="badge bg-primary text-white">{order.orderStatus}</td>
+        )}
+      </tr>
     </tbody>
   </table>
 );
