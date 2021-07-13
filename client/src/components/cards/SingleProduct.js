@@ -48,11 +48,6 @@ const SingleProduct = ({ product, onStarClick, star }) => {
         type: "ADD_TO_CART",
         payload: unique,
       });
-      // show cart items in side drawer
-      dispatch({
-        type: "SET_VISIBLE",
-        payload: true,
-      });
     }
   };
 
@@ -88,9 +83,17 @@ const SingleProduct = ({ product, onStarClick, star }) => {
         <Card
           actions={[
             <Tooltip title={tooltip}>
-              <a href onClick={handleAddToCart} disabled={product.quantity < 1}>
+              <a
+                href="/cart"
+                onClick={handleAddToCart}
+                disabled={product.quantity < 1}
+              >
                 <ShoppingCartOutlined className="text-success" /> <br />
-                {product.quantity < 1 ? <span className='text-danger'>Out of stock</span> : "Add to Cart"}
+                {product.quantity < 1 ? (
+                  <span className="text-danger">Out of stock</span>
+                ) : (
+                  "Add to Cart"
+                )}
               </a>
             </Tooltip>,
             <Link to="/">

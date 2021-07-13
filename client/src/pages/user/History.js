@@ -19,7 +19,9 @@ const History = () => {
       setOrders(res.data);
     });
 
-  const showOrderInTable = (order) => <p>each order and it's products</p>;
+  const showOrderInTable = (order) => <table>
+    
+  </table>
 
   const showEachOrders = () =>
     orders.map((order, i) => (
