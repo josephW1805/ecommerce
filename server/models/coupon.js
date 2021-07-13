@@ -19,6 +19,8 @@ const couponSchema = new mongoose.Schema(
     discount: {
       type: Number,
       required: true,
+      max: [100, "Must be at most 100, got {VALUE}"],
+      min: [0, "Must be at least 0, got {VALUE}"],
     },
   },
   { timestamps: true }
