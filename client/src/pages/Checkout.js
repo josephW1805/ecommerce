@@ -7,7 +7,6 @@ import {
   saveUserAddress,
   applyCoupon,
 } from "../functions/user";
-import { Button } from "antd";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -150,23 +149,23 @@ const Checkout = ({ history }) => {
 
         <div className="row">
           <div className="col-md-6">
-            <Button
+            <button
               disabled={!products.length || !addressSaved}
               className="btn btn-primary"
               onClick={() => history.push("/payment")}
             >
               Place Order
-            </Button>
+            </button>
           </div>
 
           <div className="col-md-6">
-            <Button
+            <button
               disabled={!products.length}
               onClick={emptyCart}
               className="btn btn-primary"
             >
               Empty Cart
-            </Button>
+            </button>
           </div>
         </div>
       </div>

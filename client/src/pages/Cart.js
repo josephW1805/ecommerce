@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button } from "antd";
 import ProductCardInCheckout from "../components/cards/ProductCardInCheckout";
 import { userCart } from "../functions/user";
 
@@ -16,6 +15,20 @@ const Cart = ({ history }) => {
   };
 
   const saveOrderToDb = () => {
+    userCart(cart, user.token)
+      .then((res) => {
+        if (res.data.ok) history.push("/checkout");
+      })
+      .catch((err) => {
+        console.log("cart save error", err);
+      });
+  };
+
+  const saveCashOrderToDb = () => {
+    dispatch({
+      type: "COD",
+      payload: true,
+    });
     userCart(cart, user.token)
       .then((res) => {
         if (res.data.ok) history.push("/checkout");
@@ -72,15 +85,25 @@ const Cart = ({ history }) => {
           Total: <b>${getTotal()}</b>
           <hr />
           {user ? (
-            <Button
-              onClick={saveOrderToDb}
-              className="btn btn-sm btn-primary mt-2"
-              disabled={!cart.length}
-            >
-              Proceed to Checkout
-            </Button>
+            <>
+              <button
+                onClick={saveOrderToDb}
+                className="btn btn-sm btn-primary mt-2"
+                disabled={!cart.length}
+              >
+                Proceed to Checkout
+              </button>
+              <br />
+              <button
+                onClick={saveCashOrderToDb}
+                className="btn btn-sm btn-warning mt-2"
+                disabled={!cart.length}
+              >
+                Pay Cash on Delivery
+              </button>
+            </>
           ) : (
-            <Button className="btn btn-sm btn-primary mt-2">
+            <button className="btn btn-sm btn-primary mt-2">
               <Link
                 to={{
                   pathname: "/login",
@@ -89,7 +112,7 @@ const Cart = ({ history }) => {
               >
                 Login to Checkout
               </Link>
-            </Button>
+            </button>
           )}
         </div>
       </div>
