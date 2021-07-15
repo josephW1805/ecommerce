@@ -25,7 +25,11 @@ const ShowPaymentInfo = ({ order, showStatus = true }) => (
         <td>{order.paymentIntent.currency.toUpperCase()}</td>
         <td>{order.paymentIntent.payment_method_types[0]}</td>
         <td>{order.paymentIntent.status.toUpperCase()}</td>
-        <td>{new Date(order.paymentIntent.created * 1000).toLocaleString()}</td>
+        <td>
+          {order.paymentIntent.payment_method_types[0] === "cash"
+            ? new Date(order.paymentIntent.created).toLocaleString()
+            : new Date(order.paymentIntent.created * 1000).toLocaleString()}
+        </td>
         {showStatus && (
           <td className="badge bg-primary text-white">{order.orderStatus}</td>
         )}
