@@ -3,7 +3,7 @@ const Product = require("../models/product");
 const Cart = require("../models/cart");
 const Coupon = require("../models/coupon");
 const Order = require("../models/order");
-const uniqueid = require("uniqueid");
+const uniqid = require("uniqid");
 
 exports.userCart = async (req, res) => {
   const { cart } = req.body;
@@ -181,7 +181,7 @@ exports.removeFromWishlist = async (req, res) => {
 };
 
 exports.createCashOrder = async (req, res) => {
-  const { COD } = req.body;
+  const { COD, couponApplied } = req.body;
   // if COD is true, create order with status of Cash On Delivery
 
   if (!COD) return res.status(400).send("Create cash order failed");
@@ -190,17 +190,26 @@ exports.createCashOrder = async (req, res) => {
 
   let userCart = await Cart.findOne({ orderedBy: user._id }).exec();
 
+  let finalAmount = 0;
+
+  if (couponApplied && userCart.totalAfterDiscount) {
+    finalAmount = userCart.totalAfterDiscount * 100;
+  } else {
+    finalAmount = userCart.cartTotal * 100;
+  }
+
   let newOrder = await new Order({
     products: userCart.products,
     paymentIntent: {
-      id: uniqueid(),
-      amount: userCart.cartTotal,
+      id: uniqid(),
+      amount: finalAmount,
       currency: "cad",
       status: "Cash On Delivery",
       created: Date.now(),
       payment_method_types: ["cash"],
     },
     orderedBy: user._id,
+    orderStatus: "Cash on Delivery",
   }).save();
 
   // decrement quantity, increment sold
